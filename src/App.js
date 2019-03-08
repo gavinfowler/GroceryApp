@@ -9,8 +9,10 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import navigationService from './services/NavigationService';
+import { Provider } from 'react-redux';
+
 import NavigationServiceComponent from './components/NavigationServiceComponent'
+import store from './redux/ReduxStore';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -22,7 +24,9 @@ const instructions = Platform.select({
 export default class App extends Component {
   render() {
     return (
-      <NavigationServiceComponent />
+      <Provider store={store}>
+        <NavigationServiceComponent />
+      </Provider>
     );
 
   }

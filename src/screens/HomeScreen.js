@@ -13,6 +13,8 @@ import {
   View
 } from 'react-native';
 import navigationService from '../services/NavigationService';
+import Counter from '../components/Counter';
+import Button from '../components/Button';
 
 
 export default class HomeScreen extends Component {
@@ -45,6 +47,17 @@ export default class HomeScreen extends Component {
             Go to Screen One
             </Text>
         </TouchableOpacity>
+        <Counter/>
+        <Button
+          name='Up'
+          incr={10}
+          style={styles.touchableButton}
+        />
+        <Button
+          name='Down'
+          incr={-1}
+          style={styles.touchableButton}
+        />
       </View>
     );
   }

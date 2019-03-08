@@ -13,6 +13,7 @@ import {
     View
 } from 'react-native';
 import navigationService from '../services/NavigationService';
+import Counter from '../components/Counter';
 
 
 export default class ScreenOne extends Component {
@@ -41,6 +42,7 @@ export default class ScreenOne extends Component {
                         Go to Home
             </Text>
                 </TouchableOpacity>
+                <Counter/>
             </View>
         );
     }
