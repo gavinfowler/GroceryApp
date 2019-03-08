@@ -10,7 +10,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  ListView
+  ListView, 
+  Alert
 } from 'react-native';
 
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab } from 'native-base'
@@ -24,9 +25,14 @@ const data = [
   'List6',
 ]
 
+const appColor='#228B22'
+
 export default class MainPage extends Component {
   static navigationOptions = {
-    title: 'Main Page'
+    title: 'Main Page',
+    headerStyle: {
+      backgroundColor: appColor
+    }
   }
 
   constructor(props) {
@@ -54,18 +60,18 @@ export default class MainPage extends Component {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <Container>
-        <Header>
+        {/* <Header style={{backgroundColor:'#228B22'}}>
           <Text style={styles.welcome}>
             Welcome to The Main Page
         </Text>
-        </Header>
+        </Header> */}
         <Content>
           <List
             leftOpenValue={75}
             rightOpenValue={-75}
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
             renderRow={data =>
-              <ListItem>
+              <ListItem onPress={()=>alert(data+" Pressed")}>
                 <Text> {data} </Text>
               </ListItem>}
             renderLeftHiddenRow={data =>
@@ -83,7 +89,7 @@ export default class MainPage extends Component {
             <Icon active name="add"/>
           </Button>
         </Footer> */}
-        <Fab position="bottomRight">
+        <Fab style={{backgroundColor:appColor}}  position="bottomRight" onPress={()=>alert('Send to add a list page')}>
           <Icon active name="add" />
         </Fab>
       </Container>

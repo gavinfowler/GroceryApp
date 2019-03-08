@@ -47,7 +47,7 @@ const Root = createStackNavigator(
     {
         Home: HomeScreen,
         One: ScreenOne,
-        Main: MainPage
+        Main: MainPage,
         // Two: ScreenTwo,
         // Three: ScreenThree,
         // Four: ScreenFour,
@@ -55,7 +55,7 @@ const Root = createStackNavigator(
     },
     {
         initialRouteName: 'Main'
-    }
+    },
 );
 
 const TopLevelNavigator = createAppContainer(Root);
