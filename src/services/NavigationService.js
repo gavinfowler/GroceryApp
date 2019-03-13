@@ -1,3 +1,10 @@
+/**
+ * Grocery List App
+ * CS3200 Mobile Development
+ * 
+ * @author GFowler
+ */
+
 import React from 'react';
 
 import {

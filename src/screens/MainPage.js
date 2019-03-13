@@ -1,7 +1,8 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * Grocery List App
+ * CS3200 Mobile Development
+ * 
+ * @author GFowler
  */
 
 import React, { Component } from 'react';

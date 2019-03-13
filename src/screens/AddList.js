@@ -1,7 +1,8 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * Grocery List App
+ * CS3200 Mobile Development
+ * 
+ * @author GFowler
  */
 
 import React, { Component } from 'react';
@@ -10,12 +11,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  TextInput,
+  Keyboard
 } from 'react-native';
+import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
-import Counter from '../components/Counter';
-import Button from '../components/Button';
-
 
 export default class AddList extends Component {
   static navigationOptions = {
@@ -27,12 +28,26 @@ export default class AddList extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      text: this.props.navigation.getParam('from').name,
+    };
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Add List</Text>
+        <TextInput
+          onChangeText={(temp) => this.setState({ text: temp })}
+          editable={true}
+          value={this.state.text}
+          onSubmitEditing={Keyboard.dismiss}
+          autoFocus={true}
+          style={styles.touchableButtonText}
+        />
+        <View style={styles.buttonContainer}>
+          <Button style={styles.buttons}><Text style={styles.buttonText}>Save</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText}>Cancel</Text></Button>
+        </View>
       </View>
     );
   }
@@ -45,23 +60,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  buttonContainer:{
+    width:'100%',
+     flex:1,
+     flexDirection:'row', 
+     justifyContent:'space-around'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  buttons:{
+    backgroundColor: '#228B22',
+    width:'25%',
+    justifyContent: 'center',
   },
-  touchableButton: {
-    backgroundColor: 'lightblue',
-    padding: 10,
-    margin: 10,
-    borderRadius: 20
+  buttonText:{
+    color: 'black',
+    fontSize: 20, 
   },
-  touchableButtonText: {
-    fontSize: 20
-  }
 });

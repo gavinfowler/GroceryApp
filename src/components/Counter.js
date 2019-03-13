@@ -1,3 +1,11 @@
+/**
+ * Grocery List App
+ * CS3200 Mobile Development
+ * 
+ * @author GFowler 
+ * @author CMano
+ */
+
 import React, { Component } from 'react';
 import {
     StyleSheet,
