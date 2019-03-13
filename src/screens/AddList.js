@@ -29,20 +29,30 @@ export default class AddList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: this.props.navigation.getParam('from').name,
+      name: '',
+      icon: '',
     };
   }
 
   render() {
     return (
       <View style={styles.container}>
+      <Text style={styles.buttonText}>List Name</Text>
         <TextInput
-          onChangeText={(temp) => this.setState({ text: temp })}
+          onChangeText={(temp) => this.setState({ name: temp })}
           editable={true}
-          value={this.state.text}
+          value={this.state.name}
           onSubmitEditing={Keyboard.dismiss}
           autoFocus={true}
-          style={styles.touchableButtonText}
+          style={{fontSize:20}}
+        />
+        <Text style={styles.buttonText}>Text Icon (URL)</Text>
+        <TextInput
+          onChangeText={(temp) => this.setState({ icon: temp })}
+          editable={true}
+          value={this.state.icon}
+          onSubmitEditing={Keyboard.dismiss}
+          style={{fontSize:20}}
         />
         <View style={styles.buttonContainer}>
           <Button style={styles.buttons}><Text style={styles.buttonText}>Save</Text></Button>

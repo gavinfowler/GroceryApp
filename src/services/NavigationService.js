@@ -3,6 +3,7 @@
  * CS3200 Mobile Development
  * 
  * @author GFowler
+ * @author CMano
  */
 
 import React from 'react';
