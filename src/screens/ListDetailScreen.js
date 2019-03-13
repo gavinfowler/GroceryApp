@@ -10,29 +10,19 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  ListView,
+  ListView, 
   Alert
 } from 'react-native';
 
-import ListComp from '../components/ListComp';
-import navigationService from '../services/NavigationService'
+import navigationServices from '../services/NavigationService'
 
-import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab } from 'native-base';
+import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab } from 'native-base'
 
-const data = [
-  'List1',
-  'List2',
-  'List3',
-  'List4',
-  'List5',
-  'List6',
-]
-
-const appColor = '#228B22'
+const appColor='#228B22'
 
 export default class MainPage extends Component {
   static navigationOptions = {
-    title: 'Main Page',
+    title: 'List Detail',
     headerStyle: {
       backgroundColor: appColor
     }
@@ -40,22 +30,25 @@ export default class MainPage extends Component {
 
   constructor(props) {
     super(props);
-    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      basic: true,
-      listViewData: this.props.list,
+      temp: null
     };
   }
 
+  /*** Mounting ***/
+  componentWillMount() {
+    console.log('ListDetail: componentWillMount');
+  }
 
   render() {
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <Container>
         <Content>
-          <ListComp />
+          <Text>
+            {this.props.navigation.getParam('from').name}
+          </Text>
         </Content>
-        <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => { navigationService.navigate('AddList') }}>
+        <Fab style={{backgroundColor:appColor}}  position="bottomRight" onPress={()=>alert('Add an item')}>
           <Icon active name="add" />
         </Fab>
       </Container>
@@ -63,32 +56,32 @@ export default class MainPage extends Component {
   }
 
   componentDidMount() {
-    console.log('MainPage: componentDidMount');
+    console.log('ListDetail: componentDidMount');
   }
 
   /*** UPDATING ***/
   componentWillReceiveProps(nextProps) {
-    console.log('MainPage: componentWillReceiveProps (nextProp.custom: ' + nextProps.navigation.getParam('custom') + ')');
+    console.log('ListDetail: componentWillReceiveProps (nextProp.custom: ' + nextProps.navigation.getParam('custom') + ')');
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('MainPage: shouldComponentUpdate');
+    console.log('ListDetail: shouldComponentUpdate');
     return true;
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('MainPage: componentWillUpdate');
+    console.log('ListDetail: componentWillUpdate');
   }
 
   //render() is the next step, but is defined already
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('MainPage: componentDidUpdate');
+    console.log('ListDetail: componentDidUpdate');
   }
 
   /*** UNMOUNTING ***/
   componentWillUnmount() {
-    console.log('MainPage: componentWillUnmount');
+    console.log('ListDetail: componentWillUnmount');
   }
 }
 

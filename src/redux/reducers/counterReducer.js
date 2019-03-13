@@ -1,7 +1,14 @@
 import { INCREMENT, DECREMENT } from '../actions/constants';
 
-let initialState = {   
-    count: 0
+const example = [
+    {name:"Example List 1", icon:"https://images.pexels.com/photos/3243/pen-calendar-to-do-checklist.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500", date: "3/12/2019, 8:13:24 PM"}, 
+    {name:"Example List 2", icon:"https://images.pexels.com/photos/3243/pen-calendar-to-do-checklist.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500", date: "3/12/2019, 8:13:24 PM"}, 
+    {name:"Example List 3", icon:"https://images.pexels.com/photos/3243/pen-calendar-to-do-checklist.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500", date: "3/12/2019, 8:13:24 PM"}, 
+]
+
+let initialState = {
+    count: 0, 
+    list: example,
 };
 
 export default function(state = initialState, action) {
