@@ -18,24 +18,18 @@ import { connect } from 'react-redux';
 
 import navigationService from "../services/NavigationService";
 
-import {NavigationEvents} from 'react-navigation'
+import { NavigationEvents } from 'react-navigation'
 
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab, Thumbnail, Left, Body, Right } from 'native-base';
 
 import { deleteList } from '../redux/actions/actions'
 
 const appColor = '#228B22';
-const data = [
-  'List1',
-  'List2',
-  'List3',
-  'List4',
-  'List5',
-  'List6',
-];
 
 class ListComp extends Component {
   constructor(props) {
+    var date = new Date();
+    console.log(date.toLocaleString());
     super(props);
     this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
@@ -54,50 +48,42 @@ class ListComp extends Component {
     // console.log(this.props.list);
   }
 
-  /*** Mounting ***/
-  componentWillMount() {
-    console.log('MainPage: componentWillMount');
-  }
-
   render() {
-    var date = new Date();
-    console.log(date.toLocaleString());
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    console.log(ds);
     return (
       <>
-      <NavigationEvents onWillFocus={()=>this.forceUpdate()}/>
-      <List
-        leftOpenValue={75}
-        rightOpenValue={-75}
-        dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-        renderRow={data =>
-          <ListItem thumbnail onPress={() => { navigationService.navigate('ListDetails', { from: data }) }}>
-            <Left>
-              <Thumbnail square source={{ uri: data.icon }} />
-            </Left>
-            <Body>
-              <Text> {data.name} </Text>
-            </Body>
-            <Right>
-              <Text> {data.date} </Text>
-            </Right>
-          </ListItem>}
-        renderLeftHiddenRow={(data, secId, rowId) =>
-          <Button full onPress={() => { navigationService.navigate('Rename', { name: data, rowId: rowId }) }}>
-            <Icon active name="information-circle" />
-          </Button>}
-        renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-          <Button full danger onPress={_ => this.deleteRow(secId, rowId, rowMap)}>
-            <Icon active name="trash" />
-          </Button>}
-      />
+        <NavigationEvents onWillFocus={() => this.forceUpdate()} />
+        <List
+          leftOpenValue={75}
+          rightOpenValue={-75}
+          dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+          renderRow={data =>
+            <ListItem thumbnail onPress={() => { navigationService.navigate('ListDetails', { from: data }) }}>
+              <Left>
+                <Thumbnail square source={{ uri: data.icon }} />
+              </Left>
+              <Body>
+                <Text> {data.name} </Text>
+              </Body>
+              <Right>
+                <Text> {data.date} </Text>
+              </Right>
+            </ListItem>}
+          renderLeftHiddenRow={(data, secId, rowId) =>
+            <Button full onPress={() => { navigationService.navigate('Rename', { name: data, rowId: rowId }) }}>
+              <Icon active name="information-circle" />
+            </Button>}
+          renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+            <Button full danger onPress={_ => this.deleteRow(secId, rowId, rowMap)}>
+              <Icon active name="trash" />
+            </Button>}
+        />
       </>
     );
   }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
     dispatchDeleteList: (index) => dispatch(deleteList(index)),
   };

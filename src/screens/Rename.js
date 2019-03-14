@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { renameList } from '../redux/actions/actions'
 
 class Rename extends Component {
@@ -49,14 +49,14 @@ class Rename extends Component {
           style={{ fontSize: 20 }}
         />
         <View style={styles.buttonContainer}>
-          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={()=>this.save()}>Save</Text></Button>
-          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={()=>navigationService.navigate('Main')}>Cancel</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={() => this.save()}>Save</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={() => navigationService.navigate('Main')}>Cancel</Text></Button>
         </View>
       </View>
     );
   }
 
-  save(){
+  save() {
     this.props.dispatchRenameList(this.props.navigation.getParam('rowId'), this.state.text);
     navigationService.navigate('Main');
   }
@@ -65,7 +65,7 @@ class Rename extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-      dispatchRenameList: (index, newName) => dispatch(renameList(index, newName))
+    dispatchRenameList: (index, newName) => dispatch(renameList(index, newName))
   };
 }
 
@@ -78,19 +78,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  buttonContainer:{
-    width:'100%',
-     flex:1,
-     flexDirection:'row', 
-     justifyContent:'space-around'
+  buttonContainer: {
+    width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
-  buttons:{
+  buttons: {
     backgroundColor: '#228B22',
-    width:'25%',
+    width: '25%',
     justifyContent: 'center',
   },
-  buttonText:{
+  buttonText: {
     color: 'black',
-    fontSize: 20, 
+    fontSize: 20,
   },
 });

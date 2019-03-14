@@ -61,7 +61,7 @@ const Root = createStackNavigator(
         Main: MainPage,
         ListDetails: ListDetails,
         Rename: Rename,
-        AddList: AddList, 
+        AddList: AddList,
         // Two: ScreenTwo,
         // Three: ScreenThree,
         // Four: ScreenFour,

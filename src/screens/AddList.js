@@ -61,7 +61,7 @@ export default class AddList extends Component {
       </View>
     );
   }
-  
+
   save() {
     alert(this.state.name + ' saved with icon ' + this.state.icon)
   }

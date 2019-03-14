@@ -22,16 +22,16 @@ export function decrement() {
     };
 }
 
-export function deleteList(index){
-    return{
+export function deleteList(index) {
+    return {
         type: DELETELIST,
         index: index
     }
 }
 
-export function renameList(index, newName){
-    return{
-        type: RENAMELIST, 
+export function renameList(index, newName) {
+    return {
+        type: RENAMELIST,
         index: index,
         newName: newName
     }

@@ -22,15 +22,6 @@ import navigationService from '../services/NavigationService'
 
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab } from 'native-base';
 
-const data = [
-  'List1',
-  'List2',
-  'List3',
-  'List4',
-  'List5',
-  'List6',
-]
-
 const appColor = '#228B22'
 
 export default class MainPage extends Component {
@@ -55,7 +46,7 @@ export default class MainPage extends Component {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <Container>
-      {/* <NavigationEvents onWillFocus={()=>console.log(focus)}/> */}
+        {/* <NavigationEvents onWillFocus={()=>console.log(focus)}/> */}
         <Content>
           <ListComp />
         </Content>
@@ -64,35 +55,6 @@ export default class MainPage extends Component {
         </Fab>
       </Container>
     );
-  }
-
-  componentDidMount() {
-    console.log('MainPage: componentDidMount');
-  }
-
-  /*** UPDATING ***/
-  componentWillReceiveProps(nextProps) {
-    console.log('MainPage: componentWillReceiveProps (nextProp.custom: ' + nextProps.navigation.getParam('custom') + ')');
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('MainPage: shouldComponentUpdate');
-    return true;
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log('MainPage: componentWillUpdate');
-  }
-
-  //render() is the next step, but is defined already
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('MainPage: componentDidUpdate');
-  }
-
-  /*** UNMOUNTING ***/
-  componentWillUnmount() {
-    console.log('MainPage: componentWillUnmount');
   }
 }
 

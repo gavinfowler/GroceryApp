@@ -23,7 +23,7 @@ class Button extends Component {
                 onPress={() => this.props.dispatchIncrement(this.props.incr)}
                 style={styles.touchableButton}
             >
-                <Text 
+                <Text
                     style={styles.touchableButtonText}>
                     {this.props.name}
                 </Text>
@@ -40,15 +40,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-  touchableButton: {
-    backgroundColor: 'lightblue',
-    padding: 10,
-    margin: 10,
-    borderRadius: 20
-  },
-  touchableButtonText: {
-    fontSize: 20
-  }
+    touchableButton: {
+        backgroundColor: 'lightblue',
+        padding: 10,
+        margin: 10,
+        borderRadius: 20
+    },
+    touchableButtonText: {
+        fontSize: 20
+    }
 });
 
 export default connect(null, mapDispatchToProps)(Button);
