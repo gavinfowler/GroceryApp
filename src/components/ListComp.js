@@ -20,6 +20,8 @@ import navigationService from "../services/NavigationService";
 
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab, Thumbnail, Left, Body, Right } from 'native-base';
 
+import { deleteList } from '../redux/actions/actions'
+
 const appColor = '#228B22';
 const data = [
   'List1',
@@ -45,6 +47,9 @@ class ListComp extends Component {
     const newData = [...this.state.listViewData];
     newData.splice(rowId, 1);
     this.setState({ listViewData: newData });
+    this.props.dispatchDeleteList(rowId);
+    console.log(rowId);
+    console.log(this.props.list);
   }
 
   /*** Mounting ***/
@@ -73,8 +78,8 @@ class ListComp extends Component {
               <Text> {data.date} </Text>
             </Right>
           </ListItem>}
-        renderLeftHiddenRow={data =>
-          <Button full onPress={() => { navigationService.navigate('Rename', { from: data }) }}>
+        renderLeftHiddenRow={(data, secId, rowId) =>
+          <Button full onPress={() => { navigationService.navigate('Rename', { name: data, rowId: rowId }) }}>
             <Icon active name="information-circle" />
           </Button>}
         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
@@ -84,6 +89,12 @@ class ListComp extends Component {
       />
     );
   }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    dispatchDeleteList: (index) => dispatch(deleteList(index)),
+  };
 }
 
 const styles = StyleSheet.create({
@@ -120,4 +131,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps)(ListComp);
+export default connect(mapStateToProps, mapDispatchToProps)(ListComp);

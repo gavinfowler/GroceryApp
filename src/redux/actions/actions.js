@@ -6,7 +6,7 @@
  * @author CMano
  */
 
-import { INCREMENT, DECREMENT } from './constants';
+import { INCREMENT, DECREMENT, DELETELIST } from './constants';
 
 export function increment(val) {
     return {
@@ -20,4 +20,11 @@ export function decrement() {
     return {
         type: DECREMENT
     };
+}
+
+export function deleteList(index){
+    return{
+        type: DELETELIST,
+        index: index
+    }
 }

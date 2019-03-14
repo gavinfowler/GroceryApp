@@ -8,8 +8,10 @@
 
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
+const DELETELIST = 'DELETELIST';
 
 export {
     INCREMENT,
-    DECREMENT
+    DECREMENT,
+    DELETELIST
 };

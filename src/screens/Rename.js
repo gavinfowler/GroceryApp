@@ -29,7 +29,8 @@ export default class Rename extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: this.props.navigation.getParam('from').name,
+      text: this.props.navigation.getParam('name').name,
+      id: this.props.navigation.getParam('rowId'),
     };
   }
 
@@ -42,7 +43,7 @@ export default class Rename extends Component {
           value={this.state.text}
           onSubmitEditing={Keyboard.dismiss}
           autoFocus={true}
-          style={styles.touchableButtonText}
+          style={{ fontSize: 20 }}
         />
         <View style={styles.buttonContainer}>
           <Button style={styles.buttons}><Text style={styles.buttonText}>Save</Text></Button>
