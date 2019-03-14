@@ -29,7 +29,7 @@ const appColor = '#228B22';
 class ListComp extends Component {
   constructor(props) {
     var date = new Date();
-    console.log(date.toLocaleString());
+    // console.log(date.toLocaleString());
     super(props);
     this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {

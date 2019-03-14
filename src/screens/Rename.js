@@ -17,8 +17,8 @@ import {
 } from 'react-native';
 import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
-import { connect } from 'react-redux'
-import { renameList } from '../redux/actions/actions'
+import { connect } from 'react-redux';
+import { renameList } from '../redux/actions/actions';
 
 class Rename extends Component {
   static navigationOptions = {

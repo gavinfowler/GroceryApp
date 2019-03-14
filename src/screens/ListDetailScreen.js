@@ -23,6 +23,8 @@ import {
   CardItem,
   Left,
   Body,
+  List,
+  ListItem,
 } from 'native-base'
 import { getList } from '../redux/actions/actions';
 import { connect } from 'react-redux';
@@ -68,13 +70,13 @@ class ListDetails extends Component {
                 </Left>
               </CardItem>
               <CardItem cardBody>
-                <Text>
-                  {this.props.activeList.itemList}
-                </Text>
+                <List style={{width:"95%"}}>
+                  {this.renderSubList()}
+                </List>
               </CardItem>
             </Card>
           </Content>
-          <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => alert('Add an item')}>
+          <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => navigationServices.navigate('AddListItem')}>
             <Icon active name="add" />
           </Fab>
         </Container>
@@ -88,18 +90,32 @@ class ListDetails extends Component {
               Please Hold...
             </Text>
           </Content>
-          <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => alert('Add an item')}>
+          <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => navigationServices.navigate('AddListItem')}>
             <Icon active name="add" />
           </Fab>
         </Container>
       );
     }
   }
+
+  renderSubList() {
+    let results = [];
+    tempKey = 0;
+    for (a of this.props.activeList.itemList) {
+      // console.log(a);
+      results.push(<ListItem
+        key={tempKey++}
+        style={[a.active ? { backgroundColor: 'white' } : { backgroundColor: 'grey' }]}>
+        <Text>{a.itemName}</Text>
+      </ListItem>);
+    }
+    return results;
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchGetList: (index) => dispatch(getList(index)),
+    dispatchGetList: (index) => dispatch(getList(index))
   };
 }
 

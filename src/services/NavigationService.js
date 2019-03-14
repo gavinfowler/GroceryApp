@@ -19,7 +19,8 @@ import ScreenOne from '../screens/ScreenOne';
 import MainPage from '../screens/MainPage';
 import ListDetails from '../screens/ListDetailScreen';
 import Rename from '../screens/Rename';
-import AddList from '../screens/AddList'
+import AddList from '../screens/AddList';
+import AddListItem from '../screens/AddListItem'
 // import ScreenTwo from '../screens/ScreenTwo';
 // import ScreenThree from '../screens/ScreenThree';
 // import ScreenFour from '../screens/ScreenFour';
@@ -62,6 +63,7 @@ const Root = createStackNavigator(
         ListDetails: ListDetails,
         Rename: Rename,
         AddList: AddList,
+        AddListItem: AddListItem,
         // Two: ScreenTwo,
         // Three: ScreenThree,
         // Four: ScreenFour,

@@ -11,6 +11,7 @@ const DECREMENT = 'DECREMENT';
 const DELETELIST = 'DELETELIST';
 const RENAMELIST = 'RENAMELIST';
 const GETLIST = 'GETLIST';
+const ADDLIST = 'ADDLIST';
 
 export {
     INCREMENT,
@@ -18,4 +19,5 @@ export {
     DELETELIST,
     RENAMELIST,
     GETLIST,
+    ADDLIST,
 };

@@ -17,12 +17,12 @@ import {
 } from 'react-native';
 import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
-import { connect } from 'react-redux';
-import {addList} from '../redux/actions/actions';
+import { connect } from 'react-redux'
+import { renameList } from '../redux/actions/actions'
 
-class AddList extends Component {
+class AddListItem extends Component {
   static navigationOptions = {
-    title: 'Add List',
+    title: 'Add List Item',
     headerStyle: {
       backgroundColor: '#228B22'
     }
@@ -31,53 +31,46 @@ class AddList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      icon: '',
+      text: ''
     };
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.buttonText}>List Name</Text>
+        {/* <Text>{this.props.navigation.getParam('name').name}</Text>
+        <Text>{this.props.navigation.getParam('rowId')}</Text> */}
         <TextInput
-          onChangeText={(temp) => this.setState({ name: temp })}
+          onChangeText={(temp) => this.setState({ text: temp })}
           editable={true}
-          value={this.state.name}
+          value={this.state.text}
           onSubmitEditing={Keyboard.dismiss}
           autoFocus={true}
           style={{ fontSize: 20 }}
         />
-        <Text style={styles.buttonText}>Text Icon (URL)</Text>
-        <TextInput
-          onChangeText={(temp) => this.setState({ icon: temp })}
-          editable={true}
-          value={this.state.icon}
-          onSubmitEditing={Keyboard.dismiss}
-          style={{ fontSize: 20 }}
-        />
         <View style={styles.buttonContainer}>
-          <Button style={styles.buttons} onPress={() => { this.save() }}><Text style={styles.buttonText}>Save</Text></Button>
-          <Button style={styles.buttons} onPress={() => { navigationService.navigate('Main') }}><Text style={styles.buttonText}>Cancel</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={() => this.save()}>Save</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={() => navigationService.navigate('Main')}>Cancel</Text></Button>
         </View>
       </View>
     );
   }
 
   save() {
-    this.props.dispatchAddList(this.state.name, this.state.icon);
-    console.log(this.state.name + ' saved with icon ' + this.state.icon);
-    navigationService.navigate('Main');
+    alert('save');
+    // this.props.dispatchRenameList(this.props.navigation.getParam('rowId'), this.state.text);
+    // navigationService.navigate('Main');
   }
+
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchAddList: (name, icon) => dispatch(addList(name, icon))
+    dispatchRenameList: (index, newName) => dispatch(renameList(index, newName))
   };
 }
 
-export default connect(null, mapDispatchToProps)(AddList);
+export default connect(null, mapDispatchToProps)(AddListItem);
 
 const styles = StyleSheet.create({
   container: {
