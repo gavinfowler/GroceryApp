@@ -7,21 +7,29 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
-  TouchableOpacity,
-  View,
-  ListView, 
-  Alert
 } from 'react-native';
 
 import navigationServices from '../services/NavigationService'
 
-import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab } from 'native-base'
+import {
+  Container,
+  Content,
+  Icon,
+  Text,
+  Fab,
+  Thumbnail,
+  Card,
+  CardItem,
+  Left,
+  Body,
+} from 'native-base'
+import { getList } from '../redux/actions/actions';
+import { connect } from 'react-redux';
 
-const appColor='#228B22'
+const appColor = '#228B22'
 
-export default class MainPage extends Component {
+class ListDetails extends Component {
   static navigationOptions = {
     title: 'List Detail',
     headerStyle: {
@@ -36,55 +44,72 @@ export default class MainPage extends Component {
     };
   }
 
-  /*** Mounting ***/
   componentWillMount() {
-    console.log('ListDetail: componentWillMount');
+    this.props.dispatchGetList(this.props.navigation.getParam('index'));
   }
 
   render() {
-    return (
-      <Container>
-        <Content>
-          <Text>
-            {this.props.navigation.getParam('from').name}
-          </Text>
-        </Content>
-        <Fab style={{backgroundColor:appColor}}  position="bottomRight" onPress={()=>alert('Add an item')}>
-          <Icon active name="add" />
-        </Fab>
-      </Container>
-    );
-  }
-
-  componentDidMount() {
-    console.log('ListDetail: componentDidMount');
-  }
-
-  /*** UPDATING ***/
-  componentWillReceiveProps(nextProps) {
-    console.log('ListDetail: componentWillReceiveProps (nextProp.custom: ' + nextProps.navigation.getParam('custom') + ')');
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('ListDetail: shouldComponentUpdate');
-    return true;
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log('ListDetail: componentWillUpdate');
-  }
-
-  //render() is the next step, but is defined already
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('ListDetail: componentDidUpdate');
-  }
-
-  /*** UNMOUNTING ***/
-  componentWillUnmount() {
-    console.log('ListDetail: componentWillUnmount');
+    if (this.props.activeList != null) {
+      return (
+        <Container>
+          <Content>
+            <Card>
+              <CardItem>
+                <Left>
+                  <Thumbnail square large source={{ uri: this.props.activeList.icon }} />
+                  <Body>
+                    <Text>
+                      {this.props.activeList.name}
+                    </Text>
+                    <Text note>
+                      {this.props.activeList.date}
+                    </Text>
+                  </Body>
+                </Left>
+              </CardItem>
+              <CardItem cardBody>
+                <Text>
+                  {this.props.activeList.itemList}
+                </Text>
+              </CardItem>
+            </Card>
+          </Content>
+          <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => alert('Add an item')}>
+            <Icon active name="add" />
+          </Fab>
+        </Container>
+      );
+    }
+    else {
+      return (
+        <Container>
+          <Content>
+            <Text>
+              Please Hold...
+            </Text>
+          </Content>
+          <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => alert('Add an item')}>
+            <Icon active name="add" />
+          </Fab>
+        </Container>
+      );
+    }
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchGetList: (index) => dispatch(getList(index)),
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    activeList: state.activeList
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListDetails);
 
 const styles = StyleSheet.create({
   container: {

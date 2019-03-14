@@ -57,8 +57,8 @@ class ListComp extends Component {
           leftOpenValue={75}
           rightOpenValue={-75}
           dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-          renderRow={data =>
-            <ListItem thumbnail onPress={() => { navigationService.navigate('ListDetails', { from: data }) }}>
+          renderRow={(data, secId, rowId) =>
+            <ListItem thumbnail onPress={() => {navigationService.navigate('ListDetails', {index:rowId}) }}>
               <Left>
                 <Thumbnail square source={{ uri: data.icon }} />
               </Left>
@@ -70,8 +70,8 @@ class ListComp extends Component {
               </Right>
             </ListItem>}
           renderLeftHiddenRow={(data, secId, rowId) =>
-            <Button full onPress={() => { navigationService.navigate('Rename', { name: data, rowId: rowId }) }}>
-              <Icon active name="information-circle" />
+            <Button full style={{backgroundColor: '#228B22'}} onPress={() => { navigationService.navigate('Rename', { name: data, rowId: rowId }) }}>
+              <Icon active name="paper" />
             </Button>}
           renderRightHiddenRow={(data, secId, rowId, rowMap) =>
             <Button full danger onPress={_ => this.deleteRow(secId, rowId, rowMap)}>

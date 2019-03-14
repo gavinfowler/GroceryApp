@@ -38,8 +38,8 @@ class Rename extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.props.navigation.getParam('name').name}</Text>
-        <Text>{this.props.navigation.getParam('rowId')}</Text>
+        {/* <Text>{this.props.navigation.getParam('name').name}</Text>
+        <Text>{this.props.navigation.getParam('rowId')}</Text> */}
         <TextInput
           onChangeText={(temp) => this.setState({ text: temp })}
           editable={true}

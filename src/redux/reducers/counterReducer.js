@@ -6,7 +6,7 @@
  * @author CMano
  */
 
-import { INCREMENT, DECREMENT, DELETELIST, RENAMELIST } from '../actions/constants';
+import { INCREMENT, DECREMENT, DELETELIST, RENAMELIST, GETLIST } from '../actions/constants';
 
 const example = [
     { name: "Example List 1", icon: "https://images.pexels.com/photos/3243/pen-calendar-to-do-checklist.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500", date: "3/12/2019, 8:13:24 PM", itemList: [] },
@@ -19,6 +19,7 @@ const example = [
 let initialState = {
     count: 0,
     list: example,
+    activeList: null,
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +34,10 @@ export default function (state = initialState, action) {
         case RENAMELIST:
             // console.log(action.newName);
             state.list[action.index].name = action.newName;
+        case GETLIST:
+            console.log(action.index);
+            console.log('ere');
+            return { activeList: state.list[action.index] }
         default:
             return state;
     }
