@@ -18,6 +18,8 @@ import { connect } from 'react-redux';
 
 import navigationService from "../services/NavigationService";
 
+import {NavigationEvents} from 'react-navigation'
+
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab, Thumbnail, Left, Body, Right } from 'native-base';
 
 import { deleteList } from '../redux/actions/actions'
@@ -48,8 +50,8 @@ class ListComp extends Component {
     newData.splice(rowId, 1);
     this.setState({ listViewData: newData });
     this.props.dispatchDeleteList(rowId);
-    console.log(rowId);
-    console.log(this.props.list);
+    // console.log(rowId);
+    // console.log(this.props.list);
   }
 
   /*** Mounting ***/
@@ -61,7 +63,10 @@ class ListComp extends Component {
     var date = new Date();
     console.log(date.toLocaleString());
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    console.log(ds);
     return (
+      <>
+      <NavigationEvents onWillFocus={()=>this.forceUpdate()}/>
       <List
         leftOpenValue={75}
         rightOpenValue={-75}
@@ -87,6 +92,7 @@ class ListComp extends Component {
             <Icon active name="trash" />
           </Button>}
       />
+      </>
     );
   }
 }

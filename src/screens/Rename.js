@@ -17,8 +17,10 @@ import {
 } from 'react-native';
 import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
+import {connect} from 'react-redux'
+import { renameList } from '../redux/actions/actions'
 
-export default class Rename extends Component {
+class Rename extends Component {
   static navigationOptions = {
     title: 'Rename',
     headerStyle: {
@@ -29,14 +31,15 @@ export default class Rename extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: this.props.navigation.getParam('name').name,
-      id: this.props.navigation.getParam('rowId'),
+      text: this.props.navigation.getParam('name').name
     };
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Text>{this.props.navigation.getParam('name').name}</Text>
+        <Text>{this.props.navigation.getParam('rowId')}</Text>
         <TextInput
           onChangeText={(temp) => this.setState({ text: temp })}
           editable={true}
@@ -46,13 +49,27 @@ export default class Rename extends Component {
           style={{ fontSize: 20 }}
         />
         <View style={styles.buttonContainer}>
-          <Button style={styles.buttons}><Text style={styles.buttonText}>Save</Text></Button>
-          <Button style={styles.buttons}><Text style={styles.buttonText}>Cancel</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={()=>this.save()}>Save</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={()=>navigationService.navigate('Main')}>Cancel</Text></Button>
         </View>
       </View>
     );
   }
+
+  save(){
+    this.props.dispatchRenameList(this.props.navigation.getParam('rowId'), this.state.text);
+    navigationService.navigate('Main');
+  }
+
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+      dispatchRenameList: (index, newName) => dispatch(renameList(index, newName))
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Rename);
 
 const styles = StyleSheet.create({
   container: {

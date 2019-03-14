@@ -15,6 +15,8 @@ import {
   Alert
 } from 'react-native';
 
+import { NavigationEvents } from 'react-navigation'
+
 import ListComp from '../components/ListComp';
 import navigationService from '../services/NavigationService'
 
@@ -53,6 +55,7 @@ export default class MainPage extends Component {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <Container>
+      {/* <NavigationEvents onWillFocus={()=>console.log(focus)}/> */}
         <Content>
           <ListComp />
         </Content>
