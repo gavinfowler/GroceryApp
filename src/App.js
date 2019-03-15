@@ -12,7 +12,9 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 
 import NavigationServiceComponent from './components/NavigationServiceComponent'
-import store from './redux/ReduxStore';
+import {store, persistor} from './redux/ReduxStore';
+
+import { PersistGate } from 'redux-persist/integration/react';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -25,7 +27,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationServiceComponent />
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationServiceComponent />
+        </PersistGate>
       </Provider>
     );
 

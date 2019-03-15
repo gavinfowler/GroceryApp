@@ -3,7 +3,6 @@
  * CS3200 Mobile Development
  * 
  * @author GFowler
- * @author CMano
  */
 
 import {
@@ -60,7 +59,6 @@ export default function (state = initialState, action) {
 			dateTime = new Date();
 			newList = { name: action.name, icon: action.icon, date: dateTime.toLocaleString(), itemList: [] };
 			state.list.push(newList);
-			console.log(state.list.length);
 			return { list: state.list };
 		case TOGGLEITEM:
 			state.list[state.activeList].itemList[action.index].active = !state.list[state.activeList].itemList[action.index].active;

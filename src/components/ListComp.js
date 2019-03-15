@@ -52,7 +52,7 @@ class ListComp extends Component {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <>
-        <NavigationEvents onWillFocus={() => this.forceUpdate()} />
+        <NavigationEvents onWillFocus={() => this.setState({listViewData:this.props.list})} />
         <List
           leftOpenValue={75}
           rightOpenValue={-75}
