@@ -16,7 +16,8 @@ import {
     TOGGLEITEM,
     RENAMEITEM,
     DELETEITEM,
-    ADDITEM
+    ADDITEM,
+    LOAD
 } from './constants';
 
 export function increment(val) {
@@ -89,5 +90,11 @@ export function addItem(name){
     return {
         type: ADDITEM,
         name: name
+    }
+}
+
+export function load(){
+    return {
+        type: LOAD
     }
 }

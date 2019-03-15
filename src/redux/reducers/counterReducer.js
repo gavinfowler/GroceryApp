@@ -6,8 +6,6 @@
  */
 
 import {
-	INCREMENT,
-	DECREMENT,
 	DELETELIST,
 	RENAMELIST,
 	GETLIST,
@@ -15,8 +13,10 @@ import {
 	TOGGLEITEM,
 	DELETEITEM,
 	RENAMEITEM,
-	ADDITEM
+	ADDITEM,
+	LOAD
 } from '../actions/constants';
+import { load } from '../../LocalStorage/storage';
 
 const exampleSubList = [
 	{ itemName: 'Fruit', active: true },
@@ -37,41 +37,50 @@ const exampleList = [
 
 let initialState = {
 	count: 0,
-	list: exampleList,
+	list: [],
 	activeList: null,
 };
 
-export default function (state = {}, action) {
+export default function (state = initialState, action) {
 	switch (action.type) {
-		case INCREMENT:
-			return { count: state.count + action.val };
-		case DECREMENT:
-			return { count: state.count - 1 };
+		case LOAD:
+			tempState = load();
+			console.log(tempState);
+			return { tempState }
 		case DELETELIST:
 			state.list.splice(action.index, 1);
+			save(state);
 			return { ...state, list: state.list };
 		case RENAMELIST:
 			state.list[action.index].name = action.newName;
+			save(state);
 			return { ...state, list: state.list };
 		case GETLIST:
+			newState = { ...state, activeList: action.index }
+			save(newState);
 			return { ...state, activeList: action.index };
 		case ADDLIST:
 			dateTime = new Date();
 			newList = { name: action.name, icon: action.icon, date: dateTime.toLocaleString(), itemList: [] };
 			state.list.push(newList);
+			save(state);
 			return { list: state.list };
 		case TOGGLEITEM:
 			state.list[state.activeList].itemList[action.index].active = !state.list[state.activeList].itemList[action.index].active;
+			save(state);
 			return { ...state, list: state.list };
 		case DELETEITEM:
 			(state.list[state.activeList].itemList).splice(action.index, 1);
+			save(state);
 			return { ...state, list: state.list };
 		case RENAMEITEM:
 			state.list[state.activeList].itemList[action.index].itemName = action.newName;
+			save(state);
 			return { ...state, list: state.list };
 		case ADDITEM:
 			newItem = { itemName: action.name, active: true };
 			state.list[state.activeList].itemList.push(newItem);
+			save(state);
 			return { ...state, list: state.list };
 		default:
 			return state;

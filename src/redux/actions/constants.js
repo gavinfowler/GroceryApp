@@ -16,6 +16,7 @@ const TOGGLEITEM = 'TOGGLEITEM';
 const DELETEITEM = 'DELETEITEM';
 const RENAMEITEM = 'RENAMEITEM';
 const ADDITEM = 'ADDITEM';
+const LOAD = 'LOAD';
 
 export {
     INCREMENT,
@@ -27,5 +28,6 @@ export {
     TOGGLEITEM,
     DELETEITEM,
     RENAMEITEM,
-    ADDITEM
+    ADDITEM,
+    LOAD
 };

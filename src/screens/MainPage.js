@@ -15,16 +15,20 @@ import {
   Alert
 } from 'react-native';
 
-import { NavigationEvents } from 'react-navigation'
+import { NavigationEvents } from 'react-navigation';
 
-import ListComp from '../components/ListComp';
+// import ListComp from '../components/ListComp';
 import navigationService from '../services/NavigationService'
 
+import { connect } from 'react-redux';
+import { load } from '../redux/actions/actions'
+
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab } from 'native-base';
+import ListComp from '../components/ListComp';
 
 const appColor = '#228B22'
 
-export default class MainPage extends Component {
+class MainPage extends Component {
   static navigationOptions = {
     title: 'Main Page',
     headerStyle: {
@@ -32,23 +36,18 @@ export default class MainPage extends Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = {
-      basic: true,
-      listViewData: this.props.list,
-    };
+  componentWillMount(){
+    this.props.dispatchLoad();
   }
 
 
   render() {
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    console.log(this.props.list);
     return (
       <Container>
         {/* <NavigationEvents onWillFocus={()=>console.log(focus)}/> */}
         <Content>
-          <ListComp />
+          <ListComp/>
         </Content>
         <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => { navigationService.navigate('AddList') }}>
           <Icon active name="add" />
@@ -57,6 +56,19 @@ export default class MainPage extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchLoad: () => dispatch(load()),
+  };
+}
+function mapStateToProps(state) {
+  return {
+    list: state.list
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
 
 const styles = StyleSheet.create({
   container: {

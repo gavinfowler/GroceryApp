@@ -20,8 +20,9 @@ const DEFAULT_LISTS = [
 export const load = async () => {
   try {
     let lists = await AsyncStorage.getItem(STORAGE_KEY);
+    console.log(lists);
     if (lists == null) {
-      return DEFAULT_LISTS
+      return DEFAULT_LISTS;
     }
     return JSON.parse(lists);
   } catch (e){
