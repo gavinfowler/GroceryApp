@@ -67,7 +67,7 @@ class AddList extends Component {
   save() {
     this.props.dispatchAddList(this.state.name, this.state.icon);
     console.log(this.state.name + ' saved with icon ' + this.state.icon);
-    navigationService.navigate('Main');
+    navigationService.goBack();
   }
 }
 

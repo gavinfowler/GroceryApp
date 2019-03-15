@@ -58,7 +58,7 @@ class Rename extends Component {
 
   save() {
     this.props.dispatchRenameList(this.props.navigation.getParam('rowId'), this.state.text);
-    navigationService.navigate('Main');
+    navigationService.goBack();
   }
 
 }

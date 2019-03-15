@@ -15,7 +15,8 @@ import {
 	ADDLIST,
 	TOGGLEITEM,
 	DELETEITEM,
-	RENAMEITEM
+	RENAMEITEM,
+	ADDITEM
 } from '../actions/constants';
 
 const exampleSubList = [
@@ -49,7 +50,7 @@ export default function (state = initialState, action) {
 			return { count: state.count - 1 };
 		case DELETELIST:
 			state.list.splice(action.index, 1);
-			return { ...state, list: state.list }
+			return { ...state, list: state.list };
 		case RENAMELIST:
 			state.list[action.index].name = action.newName;
 			return { ...state, list: state.list };
@@ -63,12 +64,16 @@ export default function (state = initialState, action) {
 			return { list: state.list };
 		case TOGGLEITEM:
 			state.list[state.activeList].itemList[action.index].active = !state.list[state.activeList].itemList[action.index].active;
-			return { ...state, list: state.list }
+			return { ...state, list: state.list };
 		case DELETEITEM:
 			(state.list[state.activeList].itemList).splice(action.index, 1);
-			return { ...state, list: state.list }
+			return { ...state, list: state.list };
 		case RENAMEITEM:
 			state.list[state.activeList].itemList[action.index].itemName = action.newName;
+			return { ...state, list: state.list };
+		case ADDITEM:
+			newItem = { itemName: action.name, active: true };
+			state.list[state.activeList].itemList.push(newItem);
 			return { ...state, list: state.list };
 		default:
 			return state;

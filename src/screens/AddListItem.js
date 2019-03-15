@@ -18,7 +18,7 @@ import {
 import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
 import { connect } from 'react-redux'
-import { renameList } from '../redux/actions/actions'
+import { addItem } from '../redux/actions/actions'
 
 class AddListItem extends Component {
   static navigationOptions = {
@@ -57,16 +57,15 @@ class AddListItem extends Component {
   }
 
   save() {
-    alert('save');
-    // this.props.dispatchRenameList(this.props.navigation.getParam('rowId'), this.state.text);
-    // navigationService.navigate('Main');
+    this.props.dispatchAddItem(this.state.text);
+    navigationService.goBack();
   }
 
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchRenameList: (index, newName) => dispatch(renameList(index, newName))
+    dispatchAddItem: (name) => dispatch(addItem(name))
   };
 }
 

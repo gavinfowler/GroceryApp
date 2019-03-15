@@ -15,7 +15,8 @@ import {
     ADDLIST,
     TOGGLEITEM,
     RENAMEITEM,
-    DELETEITEM
+    DELETEITEM,
+    ADDITEM
 } from './constants';
 
 export function increment(val) {
@@ -81,5 +82,12 @@ export function renameItem(index, newName) {
         type: RENAMEITEM,
         index: index,
         newName: newName
+    }
+}
+
+export function addItem(name){
+    return {
+        type: ADDITEM,
+        name: name
     }
 }
