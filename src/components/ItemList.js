@@ -22,8 +22,7 @@ import { NavigationEvents } from 'react-navigation';
 
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab, Thumbnail, Left, Body, Right } from 'native-base';
 
-import { deleteList, toggleItem, renameItem } from '../redux/actions/actions';
-import { TOGGLEITEM } from '../redux/actions/constants';
+import { toggleItem, deleteItem } from '../redux/actions/actions';
 
 const appColor = '#228B22';
 
@@ -46,7 +45,7 @@ class ItemList extends Component {
     const newData = [...this.state.listViewData];
     newData.splice(rowId, 1);
     this.setState({ listViewData: newData });
-    // this.props.dispatchDeleteList(rowId);
+    this.props.dispatchDeleteItem(rowId);
     // console.log(rowId);
     // console.log(this.props.list);
   }
@@ -119,6 +118,7 @@ const styles = StyleSheet.create({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchToggleItem: (index) => dispatch(toggleItem(index)),
+    dispatchDeleteItem: (index) => dispatch(deleteItem(index))
   };
 }
 

@@ -62,11 +62,11 @@ export default function (state = initialState, action) {
 			console.log(state.list.length);
 			return { list: state.list };
 		case TOGGLEITEM:
-			console.log('toggle ', action.index)
 			state.list[state.activeList].itemList[action.index].active = !state.list[state.activeList].itemList[action.index].active;
 			return { ...state, list: state.list }
 		case DELETEITEM:
-
+			(state.list[state.activeList].itemList).splice(action.index, 1);
+			return { ...state, list: state.list }
 		case RENAMEITEM:
 			state.list[state.activeList].itemList[action.index].itemName = action.newName;
 			return { ...state, list: state.list };
