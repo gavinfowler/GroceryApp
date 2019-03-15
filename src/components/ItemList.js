@@ -22,7 +22,7 @@ import { NavigationEvents } from 'react-navigation';
 
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab, Thumbnail, Left, Body, Right } from 'native-base';
 
-import { deleteList, toggleItem } from '../redux/actions/actions';
+import { deleteList, toggleItem, renameItem } from '../redux/actions/actions';
 import { TOGGLEITEM } from '../redux/actions/constants';
 
 const appColor = '#228B22';
@@ -56,6 +56,11 @@ class ItemList extends Component {
     this.forceUpdate();
   }
 
+  // rename(index, newName){
+  //   this.props.dispatchRenameItem(index, newName);
+  //   this.forceUpdate();
+  // }
+
   render() {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
@@ -70,7 +75,7 @@ class ItemList extends Component {
               <Text>{data.itemName}</Text>
             </ListItem>}
           renderLeftHiddenRow={(data, secId, rowId) =>
-            <Button full style={{backgroundColor: '#228B22'}} onPress={() => { navigationService.navigate('Rename', { name: data, rowId: rowId }) }}>
+            <Button full style={{backgroundColor: '#228B22'}} onPress={() => { navigationService.navigate('RenameListItem', { name: data, rowId: rowId }) }}>
               <Icon active name="paper" />
             </Button>}
           renderRightHiddenRow={(data, secId, rowId, rowMap) =>

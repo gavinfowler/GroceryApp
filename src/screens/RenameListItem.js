@@ -18,7 +18,7 @@ import {
 import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
 import { connect } from 'react-redux';
-import { renameList } from '../redux/actions/actions';
+import { renameItem } from '../redux/actions/actions';
 
 class RenameListItem extends Component {
   static navigationOptions = {
@@ -31,11 +31,12 @@ class RenameListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: this.props.navigation.getParam('name').name
+      text: this.props.navigation.getParam('name').itemName,
     };
   }
 
   render() {
+    // console.log(this.props.navigation.getParam('name'));
     return (
       <View style={styles.container}>
         {/* <Text>{this.props.navigation.getParam('name').name}</Text>
@@ -57,19 +58,19 @@ class RenameListItem extends Component {
   }
 
   save() {
-    this.props.dispatchRenameList(this.props.navigation.getParam('rowId'), this.state.text);
-    navigationService.navigate('Main');
+    this.props.dispatchRenameItem(this.props.navigation.getParam('rowId'), this.state.text);
+    navigationService.goBack();
   }
 
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchRenameList: (index, newName) => dispatch(renameList(index, newName))
+    dispatchRenameItem: (index, newName) => dispatch(renameItem(index, newName)),
   };
 }
 
-export default connect(null, mapDispatchToProps)(Rename);
+export default connect(null, mapDispatchToProps)(RenameListItem);
 
 const styles = StyleSheet.create({
   container: {

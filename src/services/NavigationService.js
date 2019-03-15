@@ -9,9 +9,9 @@
 import React from 'react';
 
 import {
-    createAppContainer,
-    createStackNavigator,
-    NavigationActions
+	createAppContainer,
+	createStackNavigator,
+	NavigationActions
 } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
@@ -22,62 +22,54 @@ import Rename from '../screens/Rename';
 import AddList from '../screens/AddList';
 import AddListItem from '../screens/AddListItem';
 import RenameListItem from '../screens/RenameListItem';
-// import ScreenTwo from '../screens/ScreenTwo';
-// import ScreenThree from '../screens/ScreenThree';
-// import ScreenFour from '../screens/ScreenFour';
-// import ScreenFive from '../screens/ScreenFive';
 
 // Main navigation class to handle all routing 
 let NavigationService = class NavigationService {
-    constructor() {
-    }
+	constructor() {
+	}
 
-    getTopNavigator() {
-        return (
-            <TopLevelNavigator
-                ref={navigatorRef => {
-                    this._navigator = navigatorRef;
-                }}
-            />
-        );
-    }
+	getTopNavigator() {
+		return (
+			<TopLevelNavigator
+				ref={navigatorRef => {
+					this._navigator = navigatorRef;
+				}}
+			/>
+		);
+	}
 
-    // Navigate to any screen
-    navigate(routeName, params) {
-        this._navigator.dispatch(
-            NavigationActions.navigate({
-                routeName,
-                params,
-            })
-        );
-    }
+	// Navigate to any screen
+	navigate(routeName, params) {
+		this._navigator.dispatch(
+			NavigationActions.navigate({
+				routeName,
+				params,
+			})
+		);
+	}
 
-    goBack(){
-        this._navigator.dispatch(NavigationActions.back());
-    }
+	goBack() {
+		this._navigator.dispatch(NavigationActions.back());
+	}
 }
 
 const navigationService = new NavigationService();
 export default navigationService;
 
 const Root = createStackNavigator(
-    {
-        Home: HomeScreen,
-        One: ScreenOne,
-        Main: MainPage,
-        ListDetails: ListDetails,
-        Rename: Rename,
-        AddList: AddList,
-        AddListItem: AddListItem,
-        RenameListItem: RenameListItem,
-        // Two: ScreenTwo,
-        // Three: ScreenThree,
-        // Four: ScreenFour,
-        // Five: ScreenFive
-    },
-    {
-        initialRouteName: 'Main'
-    },
+	{
+		Home: HomeScreen,
+		One: ScreenOne,
+		Main: MainPage,
+		ListDetails: ListDetails,
+		Rename: Rename,
+		AddList: AddList,
+		AddListItem: AddListItem,
+		RenameListItem: RenameListItem,
+	},
+	{
+		initialRouteName: 'Main'
+	},
 );
 
 const TopLevelNavigator = createAppContainer(Root);
