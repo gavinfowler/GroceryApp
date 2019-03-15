@@ -28,8 +28,9 @@ import {
 } from 'native-base'
 import { getList } from '../redux/actions/actions';
 import { connect } from 'react-redux';
+import ItemList from '../components/ItemList';
 
-const appColor = '#228B22'
+const appColor = '#228B22';
 
 class ListDetails extends Component {
   static navigationOptions = {
@@ -70,9 +71,7 @@ class ListDetails extends Component {
                 </Left>
               </CardItem>
               <CardItem cardBody>
-                <List style={{width:"95%"}}>
-                  {this.renderSubList()}
-                </List>
+                <ItemList />
               </CardItem>
             </Card>
           </Content>

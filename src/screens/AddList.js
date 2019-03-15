@@ -18,7 +18,7 @@ import {
 import { Button } from 'native-base'
 import navigationService from '../services/NavigationService';
 import { connect } from 'react-redux';
-import {addList} from '../redux/actions/actions';
+import { addList } from '../redux/actions/actions';
 
 class AddList extends Component {
   static navigationOptions = {
@@ -58,7 +58,7 @@ class AddList extends Component {
         />
         <View style={styles.buttonContainer}>
           <Button style={styles.buttons} onPress={() => { this.save() }}><Text style={styles.buttonText}>Save</Text></Button>
-          <Button style={styles.buttons} onPress={() => { navigationService.navigate('Main') }}><Text style={styles.buttonText}>Cancel</Text></Button>
+          <Button style={styles.buttons} onPress={() => { navigationService.goBack() }}><Text style={styles.buttonText}>Cancel</Text></Button>
         </View>
       </View>
     );

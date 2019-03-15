@@ -50,7 +50,7 @@ class AddListItem extends Component {
         />
         <View style={styles.buttonContainer}>
           <Button style={styles.buttons}><Text style={styles.buttonText} onPress={() => this.save()}>Save</Text></Button>
-          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={() => navigationService.navigate('Main')}>Cancel</Text></Button>
+          <Button style={styles.buttons}><Text style={styles.buttonText} onPress={() => navigationService.goBack()}>Cancel</Text></Button>
         </View>
       </View>
     );

@@ -12,6 +12,7 @@ const DELETELIST = 'DELETELIST';
 const RENAMELIST = 'RENAMELIST';
 const GETLIST = 'GETLIST';
 const ADDLIST = 'ADDLIST';
+const TOGGLEITEM = 'TOGGLEITEM';
 
 export {
     INCREMENT,
@@ -20,4 +21,5 @@ export {
     RENAMELIST,
     GETLIST,
     ADDLIST,
+    TOGGLEITEM,
 };

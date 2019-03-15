@@ -51,3 +51,7 @@ export function addList(name, icon){
         icon: icon,
     }
 }
+
+// export function toggleItem(index){
+
+// }

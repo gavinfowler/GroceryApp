@@ -50,6 +50,10 @@ let NavigationService = class NavigationService {
             })
         );
     }
+
+    goBack(){
+        this._navigator.dispatch(NavigationActions.back());
+    }
 }
 
 const navigationService = new NavigationService();
