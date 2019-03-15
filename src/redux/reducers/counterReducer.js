@@ -41,7 +41,7 @@ let initialState = {
 	activeList: null,
 };
 
-export default function (state = initialState, action) {
+export default function (state = {}, action) {
 	switch (action.type) {
 		case INCREMENT:
 			return { count: state.count + action.val };
