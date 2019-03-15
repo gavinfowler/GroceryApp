@@ -6,7 +6,17 @@
  * @author CMano
  */
 
-import { INCREMENT, DECREMENT, DELETELIST, RENAMELIST, GETLIST, ADDLIST } from './constants';
+import {
+    INCREMENT,
+    DECREMENT,
+    DELETELIST,
+    RENAMELIST,
+    GETLIST,
+    ADDLIST,
+    TOGGLEITEM,
+    RENAMEITEM,
+    DELETEITEM
+} from './constants';
 
 export function increment(val) {
     return {
@@ -37,21 +47,39 @@ export function renameList(index, newName) {
     }
 }
 
-export function getList(index){
+export function getList(index) {
     return {
         type: GETLIST,
         index: index,
     }
 }
 
-export function addList(name, icon){
-    return{
+export function addList(name, icon) {
+    return {
         type: ADDLIST,
         name: name,
         icon: icon,
     }
 }
 
-// export function toggleItem(index){
+export function toggleItem(index) {
+    return {
+        type: TOGGLEITEM,
+        index: index
+    }
+}
 
-// }
+export function deleteItem(index) {
+    return {
+        type: DELETEITEM,
+        index: index
+    }
+}
+
+export function renameItem(index, newName) {
+    return {
+        type: RENAMEITEM,
+        index: index,
+        newName: newName
+    }
+}

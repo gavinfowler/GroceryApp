@@ -59,13 +59,13 @@ class ListDetails extends Component {
             <Card>
               <CardItem>
                 <Left>
-                  <Thumbnail square large source={{ uri: this.props.activeList.icon }} />
+                  <Thumbnail square large source={{ uri: this.props.list[this.props.activeList].icon }} />
                   <Body>
                     <Text>
-                      {this.props.activeList.name}
+                      {this.props.list[this.props.activeList].name}
                     </Text>
                     <Text note>
-                      {this.props.activeList.date}
+                      {this.props.list[this.props.activeList].date}
                     </Text>
                   </Body>
                 </Left>
@@ -80,27 +80,16 @@ class ListDetails extends Component {
           </Fab>
         </Container>
       );
-    }
-    else {
-      return (
-        <Container>
-          <Content>
-            <Text>
-              Please Hold...
-            </Text>
-          </Content>
-          <Fab style={{ backgroundColor: appColor }} position="bottomRight" onPress={() => navigationServices.navigate('AddListItem')}>
-            <Icon active name="add" />
-          </Fab>
-        </Container>
-      );
+    } else {
+      this.forceUpdate();
+      return null;
     }
   }
 
   renderSubList() {
     let results = [];
     tempKey = 0;
-    for (a of this.props.activeList.itemList) {
+    for (a of this.props.list[this.props.activeList].itemList) {
       // console.log(a);
       results.push(<ListItem
         key={tempKey++}
@@ -120,6 +109,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
+    list: state.list,
     activeList: state.activeList
   };
 };

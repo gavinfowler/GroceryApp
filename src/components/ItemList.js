@@ -22,7 +22,8 @@ import { NavigationEvents } from 'react-navigation';
 
 import { Container, Header, Content, Button, Icon, List, ListItem, Text, Footer, Fab, Thumbnail, Left, Body, Right } from 'native-base';
 
-import { deleteList } from '../redux/actions/actions';
+import { deleteList, toggleItem } from '../redux/actions/actions';
+import { TOGGLEITEM } from '../redux/actions/constants';
 
 const appColor = '#228B22';
 
@@ -35,7 +36,7 @@ class ItemList extends Component {
     this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       basic: true,
-      listViewData: this.props.activeList.itemList,
+      listViewData: this.props.list[this.props.activeList].itemList,
     };
     // console.log(this.state.listViewData);
   }
@@ -50,6 +51,11 @@ class ItemList extends Component {
     // console.log(this.props.list);
   }
 
+  toggle(index){
+    this.props.dispatchToggleItem(index);
+    this.forceUpdate();
+  }
+
   render() {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
@@ -60,7 +66,7 @@ class ItemList extends Component {
           rightOpenValue={-75}
           dataSource={this.ds.cloneWithRows(this.state.listViewData)}
           renderRow={(data, secId, rowId) =>
-            <ListItem>
+            <ListItem style={(data.active)?{backgroundColor:'white'}:{backgroundColor:'lightgrey'}} onPress={()=>this.toggle(rowId)}>
               <Text>{data.itemName}</Text>
             </ListItem>}
           renderLeftHiddenRow={(data, secId, rowId) =>
@@ -75,12 +81,6 @@ class ItemList extends Component {
       </>
     );
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    // dispatchDeleteList: (index) => dispatch(deleteList(index)),
-  };
 }
 
 const styles = StyleSheet.create({
@@ -111,10 +111,17 @@ const styles = StyleSheet.create({
   }
 });
 
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchToggleItem: (index) => dispatch(toggleItem(index)),
+  };
+}
+
 function mapStateToProps(state) {
   return {
+    list: state.list,
     activeList: state.activeList
   };
 };
 
-export default connect(mapStateToProps)(ItemList);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemList);

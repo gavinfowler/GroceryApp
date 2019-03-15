@@ -6,7 +6,17 @@
  * @author CMano
  */
 
-import { INCREMENT, DECREMENT, DELETELIST, RENAMELIST, GETLIST, ADDLIST } from '../actions/constants';
+import {
+    INCREMENT,
+    DECREMENT,
+    DELETELIST,
+    RENAMELIST,
+    GETLIST,
+    ADDLIST,
+    TOGGLEITEM,
+    DELETEITEM,
+    RENAMEITEM
+} from '../actions/constants';
 
 const exampleSubList = [
     { itemName: 'Fruit', active: true },
@@ -44,13 +54,21 @@ export default function (state = initialState, action) {
             state.list[action.index].name = action.newName;
             return { ...state, list: state.list };
         case GETLIST:
-            return { ...state, activeList: state.list[action.index] };
+            return { ...state, activeList: action.index };
         case ADDLIST:
             dateTime = new Date();
             newList = { name: action.name, icon: action.icon, date: dateTime.toLocaleString(), itemList: [] };
             state.list.push(newList);
             console.log(state.list.length);
             return { list: state.list };
+        case TOGGLEITEM:
+            console.log('toggle ', action.index)
+            state.list[state.activeList].itemList[action.index].active = !state.list[state.activeList].itemList[action.index].active;
+            return { ...state, list: state.list }
+        case DELETEITEM:
+
+        case RENAMEITEM:
+
         default:
             return state;
     }
